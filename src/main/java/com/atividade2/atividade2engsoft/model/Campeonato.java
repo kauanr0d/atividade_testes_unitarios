@@ -1,9 +1,6 @@
 package com.atividade2.atividade2engsoft.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Campeonato {
 
@@ -77,4 +74,46 @@ public class Campeonato {
     public void setPartidas(List<Partida> partidas) {
         this.partidas = partidas;
     }
+
+    public Map<Integer, Time> getClassificacao() {
+        Map<Time, Integer> pontos = new HashMap<>();
+
+        // Inicializa pontuação
+        for (Time time : times) {
+            pontos.put(time, 0);
+        }
+
+        // Soma pontos com base no resultado das partidas
+        for (Partida partida : partidas) {
+            Resultado r = partida.getResultado();
+            if (r == null) continue;
+
+            Time mandante = partida.getTimeMandante();
+            Time visitante = partida.getTimeVisitante();
+            int golsMandante = r.getNumGolsMandante();
+            int golsVisitante = r.getNumGolsVisitante();
+
+            if (golsMandante > golsVisitante) {
+                pontos.put(mandante, pontos.get(mandante) + 3);
+            } else if (golsMandante < golsVisitante) {
+                pontos.put(visitante, pontos.get(visitante) + 3);
+            } else {
+                pontos.put(mandante, pontos.get(mandante) + 1);
+                pontos.put(visitante, pontos.get(visitante) + 1);
+            }
+        }
+
+        // Ordena os times por pontos
+        List<Time> ordenados = new ArrayList<>(times);
+        ordenados.sort((t1, t2) -> pontos.get(t2) - pontos.get(t1));
+
+        // Cria map de classificação
+        Map<Integer, Time> classificacao = new LinkedHashMap<>();
+        for (int i = 0; i < ordenados.size(); i++) {
+            classificacao.put(i + 1, ordenados.get(i));
+        }
+
+        return classificacao;
+    }
+
 }

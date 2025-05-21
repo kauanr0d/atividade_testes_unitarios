@@ -14,6 +14,21 @@ public class Time {
     private Set<Jogador> jogadores = new HashSet<>();
     private Estadio estadio;
 
+    public Time(Integer id, String nome, Set<Jogador> jogadores, Estadio estadio) {
+        this.id = id;
+        this.nome = nome;
+        this.jogadores = jogadores;
+        this.estadio = estadio;
+    }
+
+    public Time() {
+
+    }
+
+    public Time(String nome) {
+        this.nome = nome;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -53,6 +68,4 @@ public class Time {
     public void removerJogador(Jogador jogador) {
         this.jogadores.remove(jogador);
     }
-
-
 }

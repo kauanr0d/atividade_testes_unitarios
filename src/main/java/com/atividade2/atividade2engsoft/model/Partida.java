@@ -50,5 +50,11 @@ public class Partida {
         this.timeVisitante = timeVisitante;
     }
 
+    public Resultado getResultado() {
+        return resultado;
+    }
 
+    public void setResultado(Resultado resultado) {
+        this.resultado = resultado;
+    }
 }

@@ -3,6 +3,8 @@ package com.atividade2.atividade2engsoft.service;
 import com.atividade2.atividade2engsoft.model.Campeonato;
 import com.atividade2.atividade2engsoft.model.Time;
 
+import java.util.Map;
+
 public class CampeonatoService {
 
     private final Campeonato campeonato;
@@ -17,5 +19,11 @@ public class CampeonatoService {
         }
         campeonato.getTimes().add(time);
     }
+
+    public Map<Integer, Time> retornaClassificacao() {
+        return this.campeonato.getClassificacao();
+    }
+
+
 }
 
